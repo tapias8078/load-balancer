@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+ backend-docker-balancer01: #micro servicio imagen
+  container_name: 'backend-docker-balancer01' #nombre del contenedor
+  image: tapias8078/backend-docker-balancer:latest #suponiendo que la imagen es local
+  
+  ports:
+   - "4000:4000" #el primero es el que se ve en el navegador el segundo es el del contenedor
+  networks:  
+   - balancer 
+  environment:
+   CONTAINER_HOST: backend-docker-balancer01
+
+ backend-docker-balancer02: #micro servicio imagen
+  container_name: 'backend-docker-balancer02' #nombre del contenedor
+  image: tapias8078/backend-docker-balancer:latest #suponiendo que la imagen es local
+   
+  ports:
+   - "4001:4000" #el primero es el que se ve en el navegador el segundo es el del contenedor
+  networks:  
+   - balancer 
+  environment:
+   CONTAINER_HOST: backend-docker-balancer02 
+
+ load-balancer:
+  container_name: 'load-balancer' 
+  image: load-balancer:v1
+  build:
+   context: ./load-balancer
+  ports:
+   - "8082:80" 
+  networks:
+   - balancer 
+  depends_on:
+   - backend-docker-balancer01
+   - backend-docker-balancer02
+  restart: always
+networks:
+ balancer: 

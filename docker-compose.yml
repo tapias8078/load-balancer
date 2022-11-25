@@ -2,7 +2,7 @@ version: '3.7'
 services:
  backend-docker-balancer01: #micro servicio imagen
   container_name: 'backend-docker-balancer01' #nombre del contenedor
-  image: tapias8078/backend-docker-balancer:latest #suponiendo que la imagen es local
+  image: tapias8078/backend-docker-balancer:latest #suponiendo que esta en hubdocker
   
   ports:
    - "4000:4000" #el primero es el que se ve en el navegador el segundo es el del contenedor
@@ -13,7 +13,7 @@ services:
 
  backend-docker-balancer02: #micro servicio imagen
   container_name: 'backend-docker-balancer02' #nombre del contenedor
-  image: tapias8078/backend-docker-balancer:latest #suponiendo que la imagen es local
+  image: tapias8078/backend-docker-balancer:latest #suponiendo que esta en hubdocker
    
   ports:
    - "4001:4000" #el primero es el que se ve en el navegador el segundo es el del contenedor
